@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/sessions:/app/sessions
+      - ./backend/data:/app/data
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DEBUG=false
+    restart: unless-stopped
+
+  # Uncomment below if you want to serve frontend via Docker too
+  # frontend:
+  #   build: .
+  #   ports:
+  #     - "3000:80"
+  #   depends_on:
+  #     - backend
